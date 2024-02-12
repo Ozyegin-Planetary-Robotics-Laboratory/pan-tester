@@ -3,9 +3,9 @@ const app = express();
 const port = 5000;
 
 var baseCords = [41.030499, 29.259163];
-var aresCords = [41.030535, 29.259133];
-var aresCords1 = [41.030535, 29.259133];
-var aresCords2 = [41.030534, 29.259193];
+var aresCords = [38.4063641, -110.7916091];
+var aresCords1 = [38.4065641, -110.7926091];
+var aresCords2 = [38.4061641, -110.7906091];
 
 // Enable CORS
 app.use(function(req, res, next) {
