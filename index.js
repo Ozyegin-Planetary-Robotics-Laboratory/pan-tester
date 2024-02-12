@@ -9,7 +9,7 @@ var aresCords2 = [41.030534, 29.259193];
 
 app.get("/gps/base", function (req, res) {
   let gps = {
-    "Coordinates": baseCords
+    coordinates: baseCords
   }
 
   res.send(gps);
@@ -18,7 +18,7 @@ app.get("/gps/base", function (req, res) {
 app.get("/gps/rover", function (req, res) {
 
   let gps = {
-    "Coordinates": aresCords
+    coordinates: aresCords
   }
 
   res.send(gps);
