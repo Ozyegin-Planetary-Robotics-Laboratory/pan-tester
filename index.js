@@ -7,6 +7,14 @@ var aresCords = [41.030535, 29.259133];
 var aresCords1 = [41.030535, 29.259133];
 var aresCords2 = [41.030534, 29.259193];
 
+// Enable CORS
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*"); // You can set specific origins instead of '*'
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+  });
+  
+
 app.get("/gps/base", function (req, res) {
   let gps = {
     coordinates: baseCords
