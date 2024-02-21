@@ -4,8 +4,15 @@ const port = 5000;
 
 var baseCords = [41.030499, 29.259163];
 var aresCords = [38.4063641, -110.7916091];
+var oldAresCords = [38.4063641, -110.7916091];
 var aresCords1 = [38.4065641, -110.7926091];
 var aresCords2 = [38.4061641, -110.7906091];
+
+// point 1 : 38.4073641, -110.7916091
+// point 2 : 38.4073641, -110.7906091
+// point 3 : 38.4063641, -110.7916091
+
+
 
 // Enable CORS
 app.use(function(req, res, next) {
@@ -36,7 +43,7 @@ app.get("/gps/rover", function (req, res) {
 // with a smooth interpolation
 
 let i = 0;
-setInterval(() => {
+/*setInterval(() => {
   if (i < 100) {
     aresCords[0] = aresCords1[0] + (aresCords2[0] - aresCords1[0]) * i / 100;
     aresCords[1] = aresCords1[1] + (aresCords2[1] - aresCords1[1]) * i / 100;
@@ -47,7 +54,37 @@ setInterval(() => {
     aresCords2 = temp;
     i = 0;
   }
-}, 1000);
+}, 1000);*/
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+let k = 0;
+let l = 0;
+let m = 0;
+setInterval(async () => {
+  const sleep = ms => new Promise(r => setTimeout(r, ms));
+  await sleep(5000);
+  if(k<100){
+    aresCords[0] += 0.00001;
+    k++
+  }else if(l<100){
+    aresCords[1] += 0.00001;
+    l++
+  }else if(m<100){
+    aresCords[0] -= 0.00001;
+    aresCords[1] -= 0.00001;
+    m++
+  }else{
+    await sleep(5000);
+    aresCords[0] = oldAresCords[0];
+    aresCords[1] = oldAresCords[1];
+    k = 0;
+    l = 0;
+    m = 0;
+  }
+}, 50);
+
+
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
